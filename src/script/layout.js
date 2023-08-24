@@ -1,4 +1,4 @@
-const createElement = (tag, className, text) => {
+export const createElement = (tag, className, text) => {
   const element = document.createElement(tag)
   if (className) {
     element.className = className
@@ -45,7 +45,7 @@ export const createHeader = () => {
   const headerTitle = createElement(
     'h1',
     'header--title',
-    'Мій блог',
+    "Комм'юніті",
   )
   header.append(headerTitle)
   return header
@@ -110,5 +110,65 @@ export const createCard = () => {
 
     main.append(card)
   })
+  return main
+}
+
+const NAV_BUTTONS = [
+  { title: 'База знань', isActive: false },
+  { title: 'Інформація', isActive: true },
+]
+
+export const createMainContent = () => {
+  const main = createElement('section', 'main--section')
+
+  // ----- Nav Buttons -----
+  const navButtons = createElement('nav', 'nav--buttons')
+  NAV_BUTTONS.forEach((button) => {
+    const navButton = createElement(
+      'a',
+      button.isActive ? 'button button__active' : 'button',
+      button.title,
+    )
+    navButtons.append(navButton)
+  })
+  main.append(navButtons)
+
+  // ----- Main Content -----
+  const content = createElement('div', 'main--content')
+
+  // ----- Main Content Image -----
+  const contentImage = createElement(
+    'div',
+    'content--image',
+  )
+  const image = createElement('img')
+  image.src = '/img/main_img.png'
+  contentImage.append(image)
+  content.append(contentImage)
+
+  // ----- Main Content Text -----
+  const contentText = createElement('div', 'content--text')
+  const contentTitle = createElement(
+    'h2',
+    'content--text--title',
+    'Що таке база знань?',
+  )
+  const contentInfo = createElement(
+    'p',
+    'content--text--info',
+    'База знань - база даних, що містить правила виведення та інформацію про людський досвід і знання в деякій предметній галузі. У системах, що самонавчаються, база знань також містить інформацію, що є результатом вирішення попередніх завдань.',
+  )
+  contentText.append(contentTitle, contentInfo)
+  content.append(contentText)
+
+  // ----- Main Content Button -----
+  const contentButton = createElement(
+    'button',
+    'content--button',
+    "Перейти до ком'юніті у Телеграм",
+  )
+  content.append(contentButton)
+
+  main.append(content)
   return main
 }
