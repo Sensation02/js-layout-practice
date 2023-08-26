@@ -13,3 +13,12 @@ $colorMap: (
 @function color($key) {
   @return map-get($colorMap, $key);
 }
+
+@mixin click {
+  cursor: pointer;
+  transition: opacity 0.2s ease-in-out;
+
+  &:hover {
+    opacity: 0.8;
+  }
+}
